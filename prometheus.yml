@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 5s # By default, scrape targets every 15 seconds.
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: 'codelab-monitor'
+
+scrape_configs:
+  - job_name: 'simple-server'
+    scrape_interval: 1s
+    static_configs:
+      # This target cannot be localhost. It has to be the docker host machine name
+      - targets: ['pleiku.local:8090']
+
+  - job_name: 'prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets: ['localhost:9090']
+
