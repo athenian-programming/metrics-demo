@@ -30,12 +30,12 @@ git clone https://github.com/athenian-robotics/metrics-demo.git
 Before running Prometheus, update the prometheus.yml file and assign your hostname
 to the simple-server targets value (localhost will not work).
 
-Run [Prometheus](https://prometheus.io) with:
+Run [Prometheus](https://prometheus.io) in docker with:
 ```bash
 docker run -p 9090:9090 -v ~/git/metrics-demo/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
 ```
 
-Log into the Prometheus dashboat at: http://localhost:9090
+Log into the Prometheus dashboard at: http://localhost:9090
 
 View the Protheus metrics at: http://localhost:9090/metrics
 
