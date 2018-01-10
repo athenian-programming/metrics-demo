@@ -8,13 +8,16 @@ import spark.Service;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class SimpleServer {
+  private static final Counter requests    = Counter.build()
+                                                    .name("requests_total")
+                                                    .help("Total requests.")
+                                                    .register();
+  private static final Gauge   counterVals = Gauge.build()
+                                                  .name("counter_vals")
+                                                  .help("Counter Values.")
+                                                  .register();
 
-  static final  Counter    requests    = Counter.build()
-                                                .name("requests_total")
-                                                .help("Total requests.").register();
-  static final  Gauge      counterVals = Gauge.build()
-                                              .name("counter_vals").help("Counter Values.").register();
-  private final AtomicLong counter     = new AtomicLong(0);
+  private final AtomicLong counter = new AtomicLong(0);
 
   private final HealthCheckServer healthCheckServer;
   private final Service           http;
@@ -24,8 +27,6 @@ public class SimpleServer {
 
     this.http = Service.ignite();
     this.http.port(8080);
-
-
   }
 
   public static void main(String[] args)

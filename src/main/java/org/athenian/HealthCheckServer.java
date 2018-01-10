@@ -13,7 +13,6 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HealthCheckServer {
-
   private final HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
   private final AtomicBoolean       started             = new AtomicBoolean(false);
 
