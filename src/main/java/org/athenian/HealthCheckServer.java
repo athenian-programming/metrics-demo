@@ -5,6 +5,7 @@ import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.servlets.HealthCheckServlet;
 import com.codahale.metrics.servlets.PingServlet;
 import com.codahale.metrics.servlets.ThreadDumpServlet;
+import io.prometheus.client.exporter.MetricsServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -29,6 +30,7 @@ public class HealthCheckServer {
     context.addServlet(new ServletHolder(new VersionServlet()), "/version");
     context.addServlet(new ServletHolder(new HealthCheckServlet(this.healthCheckRegistry)), "/healthcheck");
     context.addServlet(new ServletHolder(new ThreadDumpServlet()), "/thread-dump");
+    context.addServlet(new ServletHolder(new MetricsServlet()), "/metrics");
   }
 
   public HealthCheckServer register(String name, HealthCheck healthCheck) {
