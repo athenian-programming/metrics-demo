@@ -1,5 +1,5 @@
 global:
-  scrape_interval: 5s # By default, scrape targets every 15 seconds.
+  scrape_interval: 5s # By default, scrape targets every 5 seconds.
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
@@ -10,6 +10,7 @@ scrape_configs:
   - job_name: 'simple-server'
     scrape_interval: 1s
     static_configs:
+      # CHANGE this targets value!!
       # This target cannot be localhost. It has to be the docker host machine name
       - targets: ['pleiku.local:8090']
 

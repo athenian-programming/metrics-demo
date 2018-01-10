@@ -1,4 +1,4 @@
-package org.athenian;
+package org.athenian.metrics;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.codahale.metrics.health.HealthCheckRegistry;
@@ -41,8 +41,7 @@ public class HealthCheckServer {
     return
         new HealthCheck() {
           @Override
-          protected Result check()
-              throws Exception {
+          protected Result check() {
             return started.get() ? HealthCheck.Result.healthy("HealthCheckServer started")
                                  : HealthCheck.Result.unhealthy("HealthCheckServer not started");
           }
@@ -53,6 +52,11 @@ public class HealthCheckServer {
       throws Exception {
     this.started.set(true);
     this.server.start();
+  }
+
+  public void stop()
+      throws Exception {
+    this.server.stop();
   }
 
 }

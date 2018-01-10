@@ -1,4 +1,4 @@
-package org.athenian;
+package org.athenian.metrics;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
