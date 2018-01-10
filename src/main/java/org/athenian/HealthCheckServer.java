@@ -13,14 +13,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HealthCheckServer {
 
+  private final HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
+  private final AtomicBoolean       started             = new AtomicBoolean(false);
+
   private final Server server;
-  protected HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
-  private   AtomicBoolean       started             = new AtomicBoolean(false);
 
   public HealthCheckServer(int port) {
     this.server = new Server(port);
 
-    final ServletContextHandler context = new ServletContextHandler();
+    ServletContextHandler context = new ServletContextHandler();
     context.setContextPath("/");
     this.server.setHandler(context);
 
@@ -30,8 +31,9 @@ public class HealthCheckServer {
     context.addServlet(new ServletHolder(new ThreadDumpServlet()), "/thread-dump");
   }
 
-  public HealthCheckRegistry getHealthCheckRegistry() {
-    return healthCheckRegistry;
+  public HealthCheckServer register(String name, HealthCheck healthCheck) {
+    this.healthCheckRegistry.register(name, healthCheck);
+    return this;
   }
 
   public HealthCheck newHealthCheck() {

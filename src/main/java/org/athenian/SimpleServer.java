@@ -13,7 +13,6 @@ public class SimpleServer {
   private final Service           http;
 
   public SimpleServer() {
-
     this.healthCheckServer = new HealthCheckServer(8090);
 
     this.http = Service.ignite();
@@ -32,11 +31,8 @@ public class SimpleServer {
       throws Exception {
 
     this.healthCheckServer
-        .getHealthCheckRegistry()
         .register("HealthCheckServer",
-                  this.healthCheckServer.newHealthCheck());
-    this.healthCheckServer
-        .getHealthCheckRegistry()
+                  this.healthCheckServer.newHealthCheck())
         .register("SimpleServer",
                   new HealthCheck() {
                     @Override
